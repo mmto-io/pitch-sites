@@ -1,7 +1,6 @@
 (() => {
   'use strict';
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const range = document.querySelector('#comparison-range');
   const comparison = document.querySelector('.comparison');
   const scrollScene = document.querySelector('.comparison-scroll');
   const heroPhoto = document.querySelector('.hero-photo');
@@ -9,53 +8,32 @@
   const strip = document.querySelector('.project-strip');
   const projects = [...document.querySelectorAll('[data-drift]')];
   const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
-  let manualComparison = false;
+  let keyboardComparison = false;
   let ticking = false;
   let observer;
 
-  range.hidden = false;
-  function setComparison(value) {
-    range.value = String(value);
-    comparison.style.setProperty('--split', `${100 - value}%`);
-    range.setAttribute('aria-valuetext', `${Math.round(value)}% of the finished kitchen revealed`);
-  }
-  range.addEventListener('input', () => {
-    manualComparison = true;
-    setComparison(Number(range.value));
+  // Keyboard navigation gets the same static pair as reduced-motion users.
+  document.addEventListener('keydown', event => {
+    if (!['Tab', 'ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Home', 'End', ' '].includes(event.key) || keyboardComparison) return;
+    keyboardComparison = true;
+    document.body.classList.remove('scroll-reveal');
   });
-  range.addEventListener('pointerdown', () => { manualComparison = true; });
-  range.addEventListener('keydown', () => { manualComparison = true; });
-  // Map the whole photograph to the native slider's accessible value.
-  let dragging = false;
-  const drag = event => {
-    const bounds = comparison.getBoundingClientRect();
-    setComparison(Math.round(100 - clamp((event.clientX - bounds.left) / bounds.width, 0, 1) * 100));
-  };
-  range.addEventListener('pointerdown', event => {
-    if (event.button !== 0) return;
-    dragging = true;
-    range.setPointerCapture(event.pointerId);
-    range.focus({ preventScroll: true });
-    event.preventDefault();
-    drag(event);
-  });
-  range.addEventListener('pointermove', event => {
-    if (dragging) { event.preventDefault(); drag(event); }
-  });
-  ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(type => range.addEventListener(type, () => { dragging = false; }));
 
   function renderScroll() {
     ticking = false;
     if (reducedMotion.matches) return;
     const heroBounds = hero.getBoundingClientRect();
     if (heroBounds.bottom > 0) heroPhoto.style.transform = `translateY(${Math.min(window.scrollY * .17, 160)}px)`;
-    if (!manualComparison) {
+    if (!keyboardComparison) {
       const scene = scrollScene.getBoundingClientRect();
       const sticky = scrollScene.querySelector('.comparison-sticky');
       const stickyTop = parseFloat(getComputedStyle(sticky).top) || 35;
       const distance = Math.max(1, scene.height - sticky.offsetHeight);
       const progress = clamp((stickyTop - scene.top) / distance, 0, 1);
-      setComparison(Math.round(5 + progress * 90));
+      comparison.style.setProperty('--uncovered', `${progress * 100}%`);
+      comparison.style.setProperty('--p', progress.toFixed(4));
+      const cloth = comparison.querySelector('.drop-cloth');
+      cloth.style.opacity = progress > .9 ? String(Math.max(0, (1 - progress) / .1)) : '1';
     }
     const stripBounds = strip.getBoundingClientRect();
     if (stripBounds.top < innerHeight && stripBounds.bottom > 0) {
@@ -70,6 +48,7 @@
   }
   function configureMotion() {
     document.body.classList.toggle('motion-enabled', !reducedMotion.matches);
+    document.body.classList.toggle('scroll-reveal', !reducedMotion.matches && !keyboardComparison);
     observer?.disconnect();
     const reveals = [...document.querySelectorAll('.reveal')];
     reveals.forEach(el => el.classList.remove('is-waiting'));
@@ -92,7 +71,6 @@
     } else {
       heroPhoto.style.transform = '';
       projects.forEach(project => { project.style.transform = ''; });
-      if (!manualComparison) setComparison(50);
     }
     requestRender();
   }
@@ -168,7 +146,7 @@
   quotes.addEventListener('focusout', () => queueMicrotask(scheduleQuote));
   document.addEventListener('visibilitychange', scheduleQuote);
   function configureQuotes() {
-    controls.hidden = reducedMotion.matches;
+    controls.hidden = false;
     showQuote(reducedMotion.matches ? 0 : currentQuote);
   }
   reducedMotion.addEventListener('change', configureQuotes);
