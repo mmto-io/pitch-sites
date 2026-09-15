@@ -21,19 +21,29 @@
   </header>
   <main id="main">
     <section class="hero" aria-labelledby="hero-heading">
-      <div class="hero-photo" aria-hidden="true"><img src="assets/hero-workshop.jpg" width="1672" height="941" alt="" fetchpriority="high"></div>
+      <div class="hero-photo" aria-hidden="true"><img src="assets/hero-workshop.jpg" width="1672" height="941" alt="" loading="eager" fetchpriority="high"></div>
       <div class="hero-scrim"></div>
       <div class="hero-top"><span class="chapter">01 / Steveston, BC</span></div>
       <h1 id="hero-heading">YOUR<br><span>HONEY-TO-DO</span><br>LIST<span class="period">.</span></h1>
-      <div class="hero-bottom"><p><svg class="tick" aria-hidden="true"><use href="#pencil-tick"/></svg> Done properly.</p><a class="hero-cta" href="tel:+17782283360" aria-label="Call Hubby For Hire at 778 228 3360"><span>Get a quote</span><span class="round-arrow" aria-hidden="true">↗</span></a></div>
+      <div class="hero-bottom"><p><svg class="tick" aria-hidden="true"><use href="#pencil-tick"/></svg> Done properly.</p><a class="hero-cta" href="tel:+17782283360" aria-label="Call Hubby For Hire at 778 228 3360"><span>Quote requested</span><span class="round-arrow" aria-hidden="true">↗</span></a></div>
     </section>
 
     <section class="crew section-pad" id="crew" aria-labelledby="crew-heading">
       <div class="section-index"><span>02 / The crew</span></div>
       <div class="crew-layout">
         <div class="crew-title reveal"><h2 id="crew-heading">GOOD HANDS.<br>SAME FAMILY<span class="period">.</span></h2><div class="crew-location"><p>Steveston <span aria-hidden="true">→</span> Metro Vancouver</p><small>Vancouver · Burnaby · New West · Ladner · Tsawwassen · Delta</small></div></div>
-        <figure class="crew-photo reveal"><img src="assets/hubbyTeam400x200.jpg" width="400" height="205" alt="Ken Miller, seated in the middle, with his sons Shea and Brendan on a porch" loading="lazy"><figcaption><div class="crew-names"><span>Ken</span><span>Shea</span><span>Brendan</span></div><div class="crew-badges"><span>Fully insured</span><span>35+ years</span></div></figcaption></figure>
+        <figure class="crew-photo reveal"><img src="assets/hubbyTeam400x200.jpg" width="400" height="205" alt="Ken Miller, seated in the middle, with his sons Shea and Brendan on a porch" loading="lazy"><figcaption><div class="crew-names"><span>Ken</span><span>Shea</span><span>Brendan</span></div><div class="crew-badges"><span>Fully insured</span><span>35+ Years Experience</span></div><p class="crew-ethos">A family-run business that prides itself on attention to detail, customer service and care.</p></figcaption></figure>
       </div>
+      <article class="ken-note" aria-label="A note from Ken">
+        <p>Hi, I'm Ken Miller, the founder and head handyman of Hubby For Hire. I'm the one in the middle of the picture, in the shadows, with my sons, Shea and Brendan. My family and crew look forward to meeting you.</p>
+        <p>You'll be more than satisfied hiring us to solve your home repairs, renovations, restorations and household "honey-to-do" list. See some samples of our work below and contact us to get started. <span class="note-emphasis">We'd love to hear from you.</span></p>
+        <span class="annotation signature">Ken Miller</span>
+      </article>
+      <dl class="proof-ledger">
+        <div><dt>Guaranteed work</dt><dd>With our craftsmanship and materials, we provide handyman services that are guaranteed.</dd></div>
+        <div><dt>On time</dt><dd>Our reliability means that we complete your home repairs and improvements on time.</dd></div>
+        <div><dt>Pricing &amp; value</dt><dd>Our quotes are competitively priced. You get value for your dollar with Hubby For Hire.</dd></div>
+      </dl>
     </section>
 
     <section class="work section-pad" id="work" aria-labelledby="work-heading">
@@ -45,6 +55,10 @@
         <li class="reveal"><button class="service-tile" type="button" aria-label="Basement & Attic Renovations · Doors & Windows" aria-pressed="false"><img src="assets/svc-egress.jpg" width="1672" height="941" alt="Newly installed basement egress window with work light and jobsite tools" loading="lazy"><span class="service-captions"><span>Basement & Attic Renovations</span><span>Doors & Windows</span></span></button></li>
         <li class="reveal"><button class="service-tile" type="button" aria-label="Odd Jobs & Repairs · Drywall & Painting" aria-pressed="false"><img src="assets/svc-door.jpg" width="1672" height="941" alt="New interior door leaning beside its installed frame, miter saw on drop cloth" loading="lazy"><span class="service-captions"><span>Odd Jobs & Repairs</span><span>Drywall & Painting</span></span></button></li>
       </ul>
+      <details class="service-ledger"><summary>Full service list <span class="annotation">We're big on small jobs.</span></summary>
+        <ul><li>drywall repairs and painting</li><li>cabinets, vanities, countertops</li><li>custom woodwork</li><li>interior finishing, crown moulding, wainscoting</li><li>floor and wall tiles</li><li>wood/laminate flooring</li><li>small antique restoration</li><li>framing, windows, siding</li><li>decks, stairs, fences</li></ul>
+      </details>
+      <p class="service-area">Proudly serving Vancouver, Burnaby, Richmond &amp; Metro Vancouver — including Surrey, Delta and more.</p>
       <div class="work-foot"><a href="#contact">Let’s get to your list <span aria-hidden="true">↗</span></a></div>
     </section>
 
@@ -56,7 +70,7 @@
             <img class="after-image" src="assets/kitchenFinishd960x540.jpg" width="960" height="540" alt="After renovation: finished white cabinets, stone counters and a tiled backsplash" loading="lazy">
             <div class="drop-cloth" aria-hidden="true">
               <div class="cloth-weave"></div>
-              <div class="cloth-hem"></div>
+              <div class="cloth-hem"><span>DRAG UP TO REVEAL ↑</span></div>
               <span class="cloth-label">DROP CLOTH — PULLED AFTER FINAL COAT</span>
               <span class="cloth-corner" aria-hidden="true"></span>
             </div>
@@ -72,60 +86,67 @@
       </div></div>
       <div class="project-strip" aria-label="More completed projects">
         <div class="project-track">
-          <figure class="project project-fence" data-drift="-24"><a href="assets/fencing960x540.jpg" aria-label="Enlarge the finished fence photograph"><img src="assets/fencing960x540.jpg" width="960" height="540" alt="New wood fence along a landscaped garden" loading="lazy"><span class="enlarge" aria-hidden="true">↗</span></a><figcaption><span>01 — Fences</span><span>Built to belong.</span></figcaption></figure>
-          <figure class="project project-vanity" data-drift="35"><a href="assets/vanity960x540.jpg" aria-label="Enlarge the new bathroom vanity photograph"><img src="assets/vanity960x540.jpg" width="960" height="540" alt="Installed bathroom vanity with sink and storage" loading="lazy"><span class="enlarge" aria-hidden="true">↗</span></a><figcaption><span>02 — Vanities</span></figcaption></figure>
-          <figure class="project project-office" data-drift="-42"><a href="assets/finishedOffice39quality960x540.jpg" aria-label="Enlarge the custom office photograph"><img src="assets/finishedOffice39quality960x540.jpg" width="960" height="540" alt="Custom built office desk and fitted shelving" loading="lazy"><span class="enlarge" aria-hidden="true">↗</span></a><figcaption><span>03 — Custom woodwork</span></figcaption></figure>
-          <figure class="project project-garden" data-drift="20"><a href="assets/backyardOasis.jpg" aria-label="Enlarge the backyard sanctuary photograph"><img src="assets/backyardOasis.jpg" width="960" height="540" alt="Completed backyard sanctuary with wood decking and garden features" loading="lazy"><span class="enlarge" aria-hidden="true">↗</span></a><figcaption><span>04 — Outdoor living</span></figcaption></figure>
+          <figure class="project project-fence" data-drift="-24"><a href="assets/fencing960x540.jpg" aria-label="Enlarge the finished fence photograph"><img src="assets/fencing960x540.jpg" width="960" height="540" alt="New wood fence along a landscaped garden" loading="lazy"><span class="enlarge" aria-hidden="true">↗</span></a><figcaption><span>01 — Fences</span><span>We replaced an old, dilapidated fence with this fence for this home owner</span></figcaption></figure>
+          <figure class="project project-vanity" data-drift="35"><a href="assets/vanity960x540.jpg" aria-label="Enlarge the new bathroom vanity photograph"><img src="assets/vanity960x540.jpg" width="960" height="540" alt="Installed bathroom vanity with sink and storage" loading="lazy"><span class="enlarge" aria-hidden="true">↗</span></a><figcaption><span>02 — Vanities</span><span>A new vanity that we installed freshens up this bathroom</span></figcaption></figure>
+          <figure class="project project-office" data-drift="-42"><a href="assets/finishedOffice39quality960x540.jpg" aria-label="Enlarge the custom office photograph"><img src="assets/finishedOffice39quality960x540.jpg" width="960" height="540" alt="Custom built office desk and fitted shelving" loading="lazy"><span class="enlarge" aria-hidden="true">↗</span></a><figcaption><span>03 — Custom woodwork</span><span>Custom office furniture that we built and installed</span></figcaption></figure>
+          <figure class="project project-garden" data-drift="20"><a href="assets/backyardOasis.jpg" aria-label="Enlarge the backyard sanctuary photograph"><img src="assets/backyardOasis.jpg" width="960" height="540" alt="Completed backyard sanctuary with wood decking and garden features" loading="lazy"><span class="enlarge" aria-hidden="true">↗</span></a><figcaption><span>04 — Outdoor living</span><span>This is a backyard sanctuary that we designed and built</span></figcaption></figure>
         </div>
       </div>
     </section>
 
     <section class="contact section-pad" id="contact" aria-labelledby="contact-heading">
       <div class="section-index"><span>05 / Your turn</span></div>
-      <h2 class="visually-hidden" id="contact-heading">Call Hubby For Hire</h2>
+      <h2 class="contact-heading" id="contact-heading">Improve every area of your home with Hubby For Hire</h2>
       <div class="phone-space"><a class="phone" href="tel:+17782283360" aria-label="Call 778 228 3360"><span>(778)</span> <span>228-3360</span></a><span class="annotation">let’s cross it off.</span></div>
       <div class="contact-details"><a class="email" href="mailto:hubbyforhire@hotmail.ca">hubbyforhire@hotmail.ca <span aria-hidden="true">↗</span></a><p>Office hours Mon–Fri 8–5<br><span class="muted">Emergency line anytime.</span></p></div>
+      <div class="contact-form-layout"><p>If you have any home repair or reno questions, contact us today for your free handyman tip or consult.</p>
+        <form class="contact-form" action="mailto:hubbyforhire@hotmail.ca" method="get" aria-label="Compose an email to Hubby For Hire">
+          <label for="contact-name">Name</label><input id="contact-name" name="name" autocomplete="name" required>
+          <label for="contact-email">Email</label><input id="contact-email" name="email" type="email" autocomplete="email" required>
+          <label for="contact-message">Message</label><textarea id="contact-message" name="body" rows="5" required></textarea>
+          <button type="submit">Send by email <span aria-hidden="true">↗</span></button>
+          <p class="form-help">Opens your email app with your message ready to send.</p>
+          <p class="form-help">Fill out the contact form below or call <a href="tel:+17782283360">(778) 228-3360</a> for any urgent matters.</p>
+        </form>
+      </div>
     </section>
 
-    <section class="testimonials section-pad" aria-labelledby="testimonials-heading">
+    <section class="testimonials section-pad" id="testimonials" aria-labelledby="testimonials-heading">
       <h2 id="testimonials-heading">A good word<br>from the neighbours.</h2>
       <div class="quotes" role="region" aria-roledescription="carousel" aria-labelledby="testimonials-heading">
         <span class="quote-mark" aria-hidden="true">“</span>
         <div class="quote-slides" aria-live="off">
-        <figure class="quote-slide"><blockquote>“They are professional, courteous, respectful and very tidy.”</blockquote><figcaption>Susan Crompton <span>— Richmond homeowner</span></figcaption></figure>
+        <figure class="quote-slide quote-long"><blockquote>“I have heard of many nightmare cases involving home renovations completed by unqualified, dishonest contractors so I wanted the right person to do my renovations. In order to avoid extensive problems, I have done thorough research to find the right person. One of my inquiries from a respected structural engineering firm resulted in my introduction to Ken Miller of Hubby For Hire. To test him out I started with small projects, all of which resulted in better than expected finishes. Subsequently, I hired Ken for larger projects, and as always he has delivered on his quality and thoroughness, and personalized customer services based on my needs. More importantly he has always met deadlines within a reasonable time frame and respected the renovations based on my budget. I would strongly recommend Ken to all my friends and family and will look forward to working with him again in the near future.”</blockquote><figcaption>Dr. Martin Kim</figcaption></figure>
+        <figure class="quote-slide" hidden><blockquote>“They are professional, courteous, respectful and very tidy.”</blockquote><figcaption>Susan Crompton <span>— Richmond homeowner</span></figcaption></figure>
         <figure class="quote-slide" hidden><blockquote>“a competent and skilled handyman.”</blockquote><figcaption>Laurie Scott <span>— President, Terra Nova Housing Co-Op</span></figcaption></figure>
         <figure class="quote-slide" hidden><blockquote>“competitive, versatile, and very reliable”</blockquote><figcaption>Dave Nessel <span>— President, Hydroforce Construction Waterproofing</span></figcaption></figure>
+        <figure class="quote-slide" hidden><blockquote><p>“I had the pleasure of having Hubby For Hire redo my deck and a new shed”</p><p>“The final outcome of my deck was way more than I had expected”</p><p>“Great job guys”</p></blockquote><figcaption>Home owner in Richmond</figcaption></figure>
+        <figure class="quote-slide" hidden><blockquote>“When they said they would be there, they were, and on budget”</blockquote></figure>
+        <figure class="quote-slide" hidden><blockquote>“It has been a pleasure dealing with them”</blockquote></figure>
+        <figure class="quote-slide" hidden><blockquote>“I would highly recommend them”</blockquote></figure>
         </div>
         <div class="quote-controls" hidden>
-          <button class="quote-dot" type="button" aria-label="Susan Crompton" aria-current="true"></button>
-          <button class="quote-dot" type="button" aria-label="Laurie Scott" aria-current="false"></button>
-          <button class="quote-dot" type="button" aria-label="Dave Nessel" aria-current="false"></button>
           <button class="quote-pause" type="button" aria-label="Pause testimonials"><span aria-hidden="true">Ⅱ</span></button>
         </div>
       </div>
     </section>
-    <section class="shop section-pad" aria-labelledby="shop-heading">
+    <section class="shop section-pad" id="shop" aria-labelledby="shop-heading">
       <div class="shop-card">
-        <div class="shop-details"><h2 id="shop-heading">The shop</h2><address>3360 Steveston Highway,<br>Richmond, BC</address><a class="directions" href="https://www.google.com/maps/search/?api=1&amp;query=Hubby+For+Hire+3360+Steveston+Highway+Richmond+BC" target="_blank" rel="noopener">Get directions <span aria-hidden="true">↗</span></a></div>
-        <a class="shop-map" href="https://www.google.com/maps/search/?api=1&amp;query=Hubby+For+Hire+3360+Steveston+Highway+Richmond+BC" target="_blank" rel="noopener" aria-label="Get directions to Hubby For Hire, 3360 Steveston Highway, Richmond, BC. Stylized map showing the shop near No. 2 Road and the Fraser River.">
-          <svg viewBox="0 0 640 360" role="img" aria-labelledby="map-title" xmlns="http://www.w3.org/2000/svg">
-            <title id="map-title">The shop on Steveston Highway, Richmond — stylized location map</title>
-            <path fill="#131216" d="M0 0h640v360H0z"/>
-            <g fill="none" stroke="#2a2731" stroke-width="3"><path d="M0 90h640M0 140h640M455 0v310"/></g>
-            <path fill="#233321" d="m20 252 105-15 40 54-94 32-54-24Z"/>
-            <path fill="#1d2733" d="M0 320Q100 280 210 314T420 319T640 296V360H0Z"/>
-            <g fill="none" stroke="#4a4550" stroke-width="14"><path d="M0 210h640M275 0v298"/></g>
-            <g fill="#b5afb2" font-family="Arial, sans-serif" font-size="14" letter-spacing="1"><text x="355" y="191">Steveston Hwy</text><text transform="translate(252 160) rotate(-90)">No. 2 Road</text></g>
-            <path d="M275 211c-8-14-23-28-23-43a23 23 0 1 1 46 0c0 15-15 29-23 43Z" fill="var(--amber, #e8a13c)" stroke="#efe9df" stroke-width="2"/>
-            <circle cx="275" cy="168" r="7" fill="#17161a"/>
-            <text x="314" y="120" fill="#efe9df" font-family="Arial, sans-serif" font-size="23">The shop</text>
-            <text x="314" y="143" fill="#b5afb2" font-family="Arial, sans-serif" font-size="14">3360 Steveston Hwy</text>
-          </svg>
-        </a>
+        <div class="shop-details"><h2 id="shop-heading">The shop</h2><address>3360 Steveston Highway,<br>Richmond, BC V7E 2J6, Canada</address><p>Hours: Monday–Friday, 8am to 5pm</p><p class="shop-visit">To visit us, please call ahead as we're often at job sites throughout Metro Vancouver.</p><p class="emergency-badge">We're also available 24/7 for any home repairs, renovations &amp; emergency services</p><a class="directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=49.133542979315386,-123.19023368482767" target="_blank" rel="noopener">Get directions <span aria-hidden="true">↗</span></a></div>
+        <div class="shop-map"><span class="shop-tab">FIND US</span><div class="shop-map-pad"></div><iframe title="Hubby For Hire location on Google Maps" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2610.5309379093364!2d-123.19023368482767!3d49.133542979315386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54860a7a7d3b32f7%3A0x8e3a083c2e515ff1!2sHubby%20For%20Hire!5e0!3m2!1sen!2sca!4v1632070202629!5m2!1sen!2sca" width="640" height="480" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe></div>
       </div>
     </section>
     <footer class="footer section-pad"><div class="footer-top"><a class="brand" href="#" aria-label="Hubby For Hire, back to top"><span class="brand-name">HUBBY<span>FOR HIRE<span class="brand-dot">.</span></span></span><span class="brand-description">Handyman<br>Services</span></a><p>Working across metro Vancouver.</p><a class="back-top" href="#">Back to top <span aria-hidden="true">↑</span></a></div><div class="footer-bottom"><span>Richmond · Vancouver · Burnaby · New Westminster · Ladner · Tsawwassen · Delta</span><span>Family-run. Done properly.</span></div></footer>
   </main>
+  <nav class="checklist-rail" aria-label="Job ticket progress" hidden><span class="rail-title">WORK ORDER</span><span class="rail-meta">STEVESTON HWY · EST. 35+ YRS</span>
+    <button type="button" data-section="crew"><span class="rail-box" aria-hidden="true">✓</span><span>Crew assigned</span></button>
+    <button type="button" data-section="work"><span class="rail-box" aria-hidden="true">✓</span><span>Scope set</span></button>
+    <button type="button" data-section="transformation"><span class="rail-box" aria-hidden="true">✓</span><span>Final walkthrough</span></button>
+    <button type="button" data-section="testimonials"><span class="rail-box" aria-hidden="true">✓</span><span>Sign-off quotes</span></button>
+    <button type="button" data-section="shop"><span class="rail-box" aria-hidden="true">✓</span><span>Shop visit</span></button>
+    <button type="button" data-section="contact"><span class="rail-box" aria-hidden="true">✓</span><span>Quote requested</span></button>
+  </nav>
+  <nav class="mobile-actions" aria-label="Quick contact" hidden><a href="tel:+17782283360">Call</a><a href="sms:+17782283360">Text</a><a href="https://www.google.com/maps/dir/?api=1&amp;destination=49.133542979315386,-123.19023368482767" target="_blank" rel="noopener">Directions</a></nav>
   <dialog class="lightbox" aria-label="Completed project photograph"><button class="close-lightbox" aria-label="Close photograph">Close <span aria-hidden="true">×</span></button><img width="960" height="540" alt=""><p></p></dialog>
 </body>
 </html>

@@ -11,6 +11,68 @@
   let keyboardComparison = false;
   let ticking = false;
   let observer;
+  const cloth = comparison.querySelector('.drop-cloth');
+  const handle = comparison.querySelector('.cloth-hem');
+  const rail = document.querySelector('.checklist-rail');
+  const railButtons = [...rail.querySelectorAll('button')];
+  const mobileActions = document.querySelector('.mobile-actions');
+  const footer = document.querySelector('.footer');
+  let drag = null;
+  let manualProgress = null;
+  let manualScroll = 0;
+  let clothProgress = 0;
+  let settleTimer;
+  rail.hidden = false;
+  function paintCloth(progress) {
+    clothProgress = progress;
+    comparison.style.setProperty('--p', progress.toFixed(4));
+    cloth.style.opacity = progress > .9 ? String(Math.max(0, (1 - progress) / .1)) : '1';
+  }
+  function updateNavigation() {
+    let current = null;
+    let currentTop = -Infinity;
+    railButtons.forEach(button => {
+      const top = document.getElementById(button.dataset.section).getBoundingClientRect().top;
+      const passed = top <= innerHeight * .5;
+      button.classList.toggle('is-checked', passed);
+      button.removeAttribute('aria-current');
+      if (passed && top > currentTop) { current = button; currentTop = top; }
+    });
+    current?.setAttribute('aria-current', 'location');
+    mobileActions.hidden = hero.getBoundingClientRect().bottom > 0 || footer.getBoundingClientRect().top <= innerHeight + 80;
+  }
+  railButtons.forEach(button => button.addEventListener('click', () => {
+    const section = document.getElementById(button.dataset.section);
+    section.scrollIntoView({ behavior: reducedMotion.matches ? 'instant' : 'smooth' });
+    section.setAttribute('tabindex', '-1');
+    section.focus({ preventScroll: true });
+  }));
+  handle.addEventListener('pointerdown', event => {
+    if (event.button !== 0 || reducedMotion.matches || keyboardComparison) return;
+    clearTimeout(settleTimer);
+    cloth.classList.remove('is-settling');
+    drag = { id: event.pointerId, y: event.clientY, progress: clothProgress };
+    handle.setPointerCapture(event.pointerId);
+    cloth.classList.add('is-dragging');
+    event.preventDefault();
+  });
+  handle.addEventListener('pointermove', event => {
+    if (!drag || event.pointerId !== drag.id) return;
+    paintCloth(clamp(drag.progress + (drag.y - event.clientY) / comparison.clientHeight, 0, 1));
+  });
+  function finishDrag(event) {
+    if (!drag || event.pointerId !== drag.id) return;
+    drag = null;
+    manualProgress = clothProgress >= .5 ? 1 : 0;
+    manualScroll = scrollY;
+    cloth.classList.remove('is-dragging');
+    cloth.classList.add('is-settling');
+    paintCloth(manualProgress);
+    settleTimer = setTimeout(() => cloth.classList.remove('is-settling'), 420);
+  }
+  handle.addEventListener('pointerup', finishDrag);
+  handle.addEventListener('pointercancel', finishDrag);
+  handle.addEventListener('lostpointercapture', finishDrag);
 
   // Keyboard navigation gets the same static pair as reduced-motion users.
   document.addEventListener('keydown', event => {
@@ -21,6 +83,7 @@
 
   function renderScroll() {
     ticking = false;
+    updateNavigation();
     if (reducedMotion.matches) return;
     const heroBounds = hero.getBoundingClientRect();
     if (heroBounds.bottom > 0) heroPhoto.style.transform = `translateY(${Math.min(window.scrollY * .17, 160)}px)`;
@@ -30,10 +93,15 @@
       const stickyTop = parseFloat(getComputedStyle(sticky).top) || 35;
       const distance = Math.max(1, scene.height - sticky.offsetHeight);
       const progress = clamp((stickyTop - scene.top) / distance, 0, 1);
-      comparison.style.setProperty('--uncovered', `${progress * 100}%`);
-      comparison.style.setProperty('--p', progress.toFixed(4));
-      const cloth = comparison.querySelector('.drop-cloth');
-      cloth.style.opacity = progress > .9 ? String(Math.max(0, (1 - progress) / .1)) : '1';
+      if (!drag) {
+        if (manualProgress !== null && Math.abs(scrollY - manualScroll) > 12) {
+          manualProgress = null;
+          cloth.classList.add('is-settling');
+          clearTimeout(settleTimer);
+          settleTimer = setTimeout(() => cloth.classList.remove('is-settling'), 420);
+        }
+        paintCloth(manualProgress ?? progress);
+      }
     }
     const stripBounds = strip.getBoundingClientRect();
     if (stripBounds.top < innerHeight && stripBounds.bottom > 0) {
@@ -100,7 +168,14 @@
 
   const quotes = document.querySelector('.quotes');
   const slides = [...quotes.querySelectorAll('.quote-slide')];
-  const dots = [...quotes.querySelectorAll('.quote-dot')];
+  const dots = slides.map((slide, index) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'quote-dot';
+    button.setAttribute('aria-label', `Review ${index + 1}: ${slide.querySelector('figcaption')?.textContent || slide.querySelector('blockquote').textContent}`);
+    quotes.querySelector('.quote-controls').insertBefore(button, quotes.querySelector('.quote-pause'));
+    return button;
+  });
   const controls = quotes.querySelector('.quote-controls');
   const pause = quotes.querySelector('.quote-pause');
   const slideContainer = quotes.querySelector('.quote-slides');
@@ -112,7 +187,7 @@
     clearTimeout(quoteTimer);
     const stopped = reducedMotion.matches || paused || hovered || quotes.contains(document.activeElement) || document.hidden;
     slideContainer.setAttribute('aria-live', stopped ? 'polite' : 'off');
-    if (!stopped) quoteTimer = setTimeout(() => showQuote(currentQuote + 1), 6000);
+    if (!stopped) quoteTimer = setTimeout(() => showQuote(currentQuote + 1), Math.max(6000, slides[currentQuote].textContent.split(/\s+/).length * 300));
   }
   function showQuote(index) {
     currentQuote = (index + slides.length) % slides.length;
@@ -151,6 +226,23 @@
   }
   reducedMotion.addEventListener('change', configureQuotes);
   configureQuotes();
+  // Reserve the tallest review at every width, including after fonts load.
+  function sizeQuotes() {
+    slides.forEach(slide => { slide.hidden = false; });
+    const height = Math.max(...slides.map(slide => slide.getBoundingClientRect().height));
+    slideContainer.style.minHeight = `${Math.ceil(height)}px`;
+    slides.forEach((slide, index) => { slide.hidden = index !== currentQuote; });
+  }
+  sizeQuotes();
+  window.addEventListener('resize', sizeQuotes, { passive: true });
+  document.fonts.ready.then(sizeQuotes);
+  const form = document.querySelector('.contact-form');
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const body = `Name: ${data.get('name')}\nEmail: ${data.get('email')}\n\n${data.get('body')}`;
+    window.location.href = `mailto:hubbyforhire@hotmail.ca?subject=${encodeURIComponent('Home repair enquiry from ' + data.get('name'))}&body=${encodeURIComponent(body)}`;
+  });
 
   const dialog = document.querySelector('.lightbox');
   let trigger;
